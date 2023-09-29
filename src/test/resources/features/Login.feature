@@ -6,5 +6,3 @@ Feature: Login page validation
     When user enters username and password
     And user clicks on login button
     Then user should be able to navigate to products page
-
-

@@ -16,25 +16,25 @@ public class CommonMethods extends PageInitializer {
 
 
     public static void launchingTheApplication() throws MalformedURLException {
-        CofigReader.readProperties();
+        ConfigReader.readProperties();
         //we need application path, where my apk file is placed
         File appDir = new File("apk");
         File app = new File(appDir, "TestApp.apk");
         //in desired capabilities, we pass all the information about device, software, version, apk etc
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-     //   capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
+        //   capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, "60");
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "");
-        capabilities.setCapability("noReset","true");
+        capabilities.setCapability("noReset", "true");
         capabilities.setCapability("deviceName", "emulator-5554");
-        capabilities.setCapability("platformName","Android");
-        capabilities.setCapability("automatorName","UIAutomator2");
-        capabilities.setCapability("noSign","true");
-        capabilities.setCapability("appPackage",CofigReader.getPropertyValue("appPackage"));
-        capabilities.setCapability("appActivity",CofigReader.getPropertyValue("appActivity"));
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("automatorName", "UIAutomator2");
+        capabilities.setCapability("noSign", "true");
+        capabilities.setCapability("appPackage", ConfigReader.getPropertyValue("appPackage"));
+        capabilities.setCapability("appActivity", ConfigReader.getPropertyValue("appActivity"));
 
         //we have appium server to connect our devices to scripts
-        URL u  = new URL("http://127.0.0.1:4723/wd/hub");
+        URL u = new URL("http://127.0.0.1:4723/wd/hub");
 
         driver = new AppiumDriver(u, capabilities);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -42,8 +42,4 @@ public class CommonMethods extends PageInitializer {
         //we are initializing all the objects from here
         initializeObject();
     }
-
-
-
-
 }
